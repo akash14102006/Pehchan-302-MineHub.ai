@@ -17,3 +17,7 @@ yarn-error.log*
 .env.*.local
 .DS_Store
 Thumbs.db
+
+# Exclude Pragati Mitra folders
+SIH_PRAGATI_MITRA-24-main/
+PragatiMitra-Application-main/
