@@ -1,0 +1,325 @@
+/* ==========================================================================
+   MineHub Hover-Reveal Card & Stage Card System
+   Compliant with MINEHUB_REFERENCE_HOVER_REVEAL_CARD_DESIGN_PROMPT.md
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Capability / Feature Card (Hover Reveal)
+   -------------------------------------------------------------------------- */
+.minehub-reveal-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  /* Section 4: Exact pale cyan gradient */
+  background: linear-gradient(to bottom, #c3e6ec 0%, #a7d1d9 100%);
+  /* Section 3: 10-14px border radius */
+  border-radius: 12px;
+  /* Section 3: 20-24px internal padding */
+  padding: 24px 24px 20px 24px;
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+  /* Soft, Subtle Neumorphic Depth: light outer shadow + subtle inner depth */
+  box-shadow: 6px 6px 16px rgba(22, 72, 99, 0.10), 
+              -4px -4px 12px rgba(255, 255, 255, 0.85), 
+              inset 1px 1px 2px rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(22, 72, 99, 0.08);
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: 160px;
+}
+
+.minehub-reveal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 20px rgba(22, 72, 99, 0.14), 
+              -5px -5px 14px rgba(255, 255, 255, 0.9), 
+              inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.minehub-reveal-card:active {
+  transform: translateY(1px) scale(0.995);
+  box-shadow: inset 2px 2px 6px rgba(22, 72, 99, 0.15), 
+              inset -2px -2px 6px rgba(255, 255, 255, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   2. Diagonal Circular Expansion Reveal Pseudo-Element (Section 7 & 8)
+   -------------------------------------------------------------------------- */
+.minehub-reveal-card::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -16px;
+  right: -16px;
+  background-color: #164863;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.minehub-reveal-card:hover::before,
+.minehub-reveal-card:focus-visible::before,
+.minehub-reveal-card:focus-within::before {
+  transform: scale(32);
+}
+
+/* --------------------------------------------------------------------------
+   3. Top-Right Corner & Actionable Arrow (Section 7, 10, 11)
+   -------------------------------------------------------------------------- */
+.minehub-reveal-card .go-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 2.2em;
+  height: 2.2em;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  background-color: #164863;
+  border-radius: 0 4px 0 32px;
+  transition: background-color 0.3s ease;
+}
+
+.minehub-reveal-card:hover .go-corner,
+.minehub-reveal-card:focus-visible .go-corner {
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+.minehub-reveal-card .go-arrow {
+  margin-top: -3px;
+  margin-right: -3px;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  transition: transform 0.3s ease;
+}
+
+.minehub-reveal-card:hover .go-arrow,
+.minehub-reveal-card:focus-visible .go-arrow {
+  transform: translate(1px, -1px);
+}
+
+/* --------------------------------------------------------------------------
+   4. Typography & Color Transitions (Section 5, 6, 9)
+   -------------------------------------------------------------------------- */
+.minehub-reveal-card .card-top-icon {
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 14px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.minehub-reveal-card:hover .card-top-icon {
+  transform: scale(1.12);
+}
+
+.minehub-reveal-card .card-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+  color: #195279;
+  margin-bottom: 6px;
+  transition: color 0.35s ease;
+}
+
+.minehub-reveal-card .card-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.minehub-reveal-card:hover .card-eyebrow,
+.minehub-reveal-card:focus-visible .card-eyebrow {
+  color: #ffda79;
+}
+
+.minehub-reveal-card .card-title {
+  color: #164863;
+  font-size: 1.25rem;
+  line-height: 1.28;
+  font-weight: 700;
+  margin: 0;
+  padding-right: 20px;
+  transition: color 0.35s ease;
+}
+
+.minehub-reveal-card:hover .card-title,
+.minehub-reveal-card:focus-visible .card-title {
+  color: #ffffff;
+}
+
+.minehub-reveal-card .card-desc {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #2b4257;
+  margin: 0;
+  transition: color 0.35s ease;
+  flex-grow: 1;
+}
+
+.minehub-reveal-card:hover .card-desc,
+.minehub-reveal-card:focus-visible .card-desc {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* --------------------------------------------------------------------------
+   5. Accessible Focus Ring (Section 13)
+   -------------------------------------------------------------------------- */
+.minehub-reveal-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffda79, 0 8px 22px rgba(22, 72, 99, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   6. Disabled State (Section 40)
+   -------------------------------------------------------------------------- */
+.minehub-reveal-card.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.minehub-reveal-card.is-disabled::before {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. Loading Skeleton State (Section 41)
+   -------------------------------------------------------------------------- */
+.minehub-reveal-card.is-loading {
+  cursor: default;
+  pointer-events: none;
+}
+
+.minehub-reveal-card.is-loading::before {
+  display: none;
+}
+
+.minehub-reveal-card.is-loading .go-corner {
+  display: none;
+}
+
+.card-skeleton {
+  background: linear-gradient(90deg, rgba(22, 72, 99, 0.08) 25%, rgba(22, 72, 99, 0.16) 50%, rgba(22, 72, 99, 0.08) 75%);
+  background-size: 200% 100%;
+  animation: cardSkeletonShimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-eyebrow {
+  width: 90px;
+  height: 12px;
+  margin-bottom: 12px;
+}
+
+.skeleton-title {
+  width: 75%;
+  height: 24px;
+  margin-bottom: 14px;
+}
+
+.skeleton-desc {
+  width: 100%;
+  height: 14px;
+  margin-bottom: 8px;
+}
+
+.skeleton-desc.short {
+  width: 60%;
+}
+
+@keyframes cardSkeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --------------------------------------------------------------------------
+   8. Stage Card Style (Section 18 & 19)
+   -------------------------------------------------------------------------- */
+.minehub-stage-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 24px 22px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 4px solid var(--stage-accent, #4CAF50);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-sizing: border-box;
+}
+
+.minehub-stage-card.is-interactive {
+  cursor: pointer;
+}
+
+.minehub-stage-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.09);
+}
+
+.minehub-stage-card:focus-visible {
+  outline: 2px solid var(--stage-accent, #4CAF50);
+  outline-offset: 2px;
+}
+
+.minehub-stage-card .stage-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--stage-accent, #4CAF50);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 10px;
+}
+
+.minehub-stage-card .stage-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #164863;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.minehub-stage-card .stage-desc {
+  font-size: 0.92rem;
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* --------------------------------------------------------------------------
+   9. Reduced Motion Support (Section 37)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .minehub-reveal-card::before {
+    display: none;
+  }
+  .minehub-reveal-card,
+  .minehub-stage-card {
+    transition: none;
+  }
+  .minehub-reveal-card:hover,
+  .minehub-reveal-card:focus-visible {
+    background: #164863;
+  }
+  .card-skeleton {
+    animation: none;
+  }
+}
