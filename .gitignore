@@ -26,12 +26,14 @@ PragatiMitra-Application-main/
 Reference style/
 Enterprise grade/
 Update Prompt/
+prompts/
+docs/
 
 # Exclude Root Duplicate/Reference Assets (Production runtime uses MineApp/src/assets & MineApp/public/)
 Assets/
 Features List Lotties/
-Logo/
 cillogo-full.png
+
 
 # Zoho Catalyst Local Cache
 .catalyst/
