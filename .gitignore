@@ -21,3 +21,18 @@ Thumbs.db
 # Exclude Pragati Mitra folders
 SIH_PRAGATI_MITRA-24-main/
 PragatiMitra-Application-main/
+
+# Exclude Local-Only Reference & Prompt folders (Not for production GitHub)
+Reference style/
+Enterprise grade/
+Update Prompt/
+
+# Exclude Root Duplicate/Reference Assets (Production runtime uses MineApp/src/assets & MineApp/public/)
+Assets/
+Features List Lotties/
+Logo/
+cillogo-full.png
+
+# Zoho Catalyst Local Cache
+.catalyst/
+**/.catalyst/
